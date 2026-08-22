@@ -1,73 +1,56 @@
 # Vite React Express Boilerplate
 
-> Quickly bootstrap a new project with Vite React Express Boilerplate.
+A modern full-stack starter boilerplate featuring a Vite-powered React frontend and a lightweight Express backend.
 
-This boilerplate is a fork of [lmachens/vite-boilerplate](https://github.com/lmachens/vite-boilerplate), but replaces TypeScript with JavaScript and removes Storybook.
+## Overview
 
-This boilerplate contains all the tools you need to build a modern web app with JavaScript, React, Vite, and Express.  
-You can use it to quickly bootstrap your project.
+`vite-test` provides a rapid development environment for building full-stack web applications with concurrent hot module replacement for both frontend client code and Express API routes.
 
-ESLint, stylelint, prettier, husky and lintstaged are configured to give you a solid development experience.
+## Tech Stack
 
-## Installing / Developing
+- **Frontend**: React (v17), [Vite](https://vitejs.dev/) (v2), React Router DOM v6
+- **Backend API**: Node.js & Express (v4)
+- **Tooling**: Babel, Concurrently, Nodemon, ESLint, Prettier, Stylelint
 
-First, [create a repository from this template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template).
+## Prerequisites
 
-Now you are ready to go:
+- Node.js (v16 or v18 recommended)
+- Package manager (`pnpm` or `npm`)
 
-```shell
-npm install
-```
+## Getting Started
 
-This will install the dependencies required to run the boilerplate.
+1. **Install dependencies**:
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
 
-```shell
-npm run dev
-```
+2. **Configure Environment Variables**:
+   Create a `.env` file based on `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
 
-Boom! These scripts run your server and client in development mode.
+3. **Run Concurrently in Development Mode**:
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
 
-The default PORTS are:
+4. **Access the Application**:
+   Open `http://localhost:3000` (or `http://localhost:5173`) in your web browser.
 
-- `3001` for the server
-- `3000` for the client
+## Available Scripts
 
-If you don't like to call all scripts at once, you can also run:
+- `npm run dev` - Concurrently starts both Express backend and Vite frontend with live reload.
+- `npm run client:dev` - Starts only the Vite frontend dev server.
+- `npm run server:dev` - Starts only the Express server with Nodemon.
+- `npm run build` - Compiles both server and client for production.
+- `npm start` - Starts the compiled Express server in production.
+- `npm test` - Runs linting and code style checks.
 
-```shell
-npm run server:dev
-npm run client:dev
-```
+## Author
 
-You can configure the server port by setting the `PORT` environment variable. Creating a `.env` file is supported. You can copy `.env.example` to `.env`.
-
-| KEY  | VALUE                                                         |
-| ---- | ------------------------------------------------------------- |
-| PORT | (Optional) Port for the server environment (defaults to 3001) |
-
-## Building
-
-To build the project, run:
-
-```shell
-npm run build
-```
-
-This will build the client and server.
-
-```shell
-npm start
-```
-
-In production, you have a single server serving everything.
-
-`/api/*` is the API endpoint.  
-`/*` is the client.
-
-## Tests
-
-A test runner is not installed (right now). But ESLint and Prettier are checked on commit and pushed thanks to husky and lintstaged.
-
-## Licensing
-
-MIT
+Created by [Mehfooz-ur-Rehman](https://github.com/MehfoozurRehman).
