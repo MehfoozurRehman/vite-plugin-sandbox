@@ -1,56 +1,40 @@
 # Vite React Express Boilerplate
 
-A modern full-stack starter boilerplate featuring a Vite-powered React frontend and a lightweight Express backend.
+A starter for a full-stack app: a Vite and React front end with an Express API in the same repo. Both run together in development, and the production server serves the built client.
 
-## Overview
+**Status:** Starter. It is a working template with one demo API route (`GET /api/hello`) and a welcome screen, and it is meant to be copied as the base of a new project rather than shipped as an app.
 
-`vite-test` provides a rapid development environment for building full-stack web applications with concurrent hot module replacement for both frontend client code and Express API routes.
+## The problem
 
-## Tech Stack
+Starting a React app with a separate Express API means repeating the same setup: a bundler, a dev server that runs both halves, a proxy so the front end can call the API, and a production server. This repo puts that setup in one place.
 
-- **Frontend**: React (v17), [Vite](https://vitejs.dev/) (v2), React Router DOM v6
-- **Backend API**: Node.js & Express (v4)
-- **Tooling**: Babel, Concurrently, Nodemon, ESLint, Prettier, Stylelint
+## What it does
 
-## Prerequisites
+- Renders a welcome page with a button component, using CSS modules (`src/app/App.jsx`, `src/app/components/`).
+- Exposes a demo endpoint, `GET /api/hello`, which returns `{ message: 'Hello World!' }` (`src/lib/router.js`).
+- Serves the built client from `dist/app` and returns the app shell for any other path (`src/server.js`).
+- Runs the Vite dev server with a proxy in `vite.config.js`, so requests to the API reach Express during development.
 
-- Node.js (v16 or v18 recommended)
-- Package manager (`pnpm` or `npm`)
+## How it's built
 
-## Getting Started
+- React 17 with React Router DOM 6 on the front end, bundled by Vite 2.
+- Express 4 for the API. `src/server.js` mounts the router under `/api` and parses JSON bodies.
+- Server code is compiled with Babel into `dist/` by `server:build`, and the production build also runs `vite build`.
+- `concurrently` and `nodemon` run the client and server together in `pnpm dev`.
+- ESLint, Prettier and Stylelint are configured, with lint-staged in `.lintstagedrc.json`.
 
-1. **Install dependencies**:
-   ```bash
-   pnpm install
-   # or
-   npm install
-   ```
+## Running it locally
 
-2. **Configure Environment Variables**:
-   Create a `.env` file based on `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
+```bash
+pnpm install
+cp .env.example .env   # set PORT
+pnpm dev               # client and API together
+pnpm build             # babel for the server, vite for the client
+```
 
-3. **Run Concurrently in Development Mode**:
-   ```bash
-   pnpm dev
-   # or
-   npm run dev
-   ```
+Other scripts: `clean` (removes `dist`), `serve` (Vite preview) and `format`.
 
-4. **Access the Application**:
-   Open `http://localhost:3000` (or `http://localhost:5173`) in your web browser.
+## What's left
 
-## Available Scripts
-
-- `npm run dev` - Concurrently starts both Express backend and Vite frontend with live reload.
-- `npm run client:dev` - Starts only the Vite frontend dev server.
-- `npm run server:dev` - Starts only the Express server with Nodemon.
-- `npm run build` - Compiles both server and client for production.
-- `npm start` - Starts the compiled Express server in production.
-- `npm test` - Runs linting and code style checks.
-
-## Author
-
-Created by [Mehfooz-ur-Rehman](https://github.com/MehfoozurRehman).
+- The only API route is the hello demo. A real project would add its own routes and a data layer.
+- There is no authentication, database or test setup.
